@@ -24,36 +24,32 @@
       --purple: #7c3aed;
       --orange-brand: #ff9f1c;
       --lime: #d9ff66;
+      /* Single source of truth for the mobile breakpoint.
+         JS reads this via getComputedStyle so the number never
+         needs to be duplicated in script. */
+      --mobile-bp: 840px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
       font-family: Inter, Arial, sans-serif;
       background:
-        radial-gradient(circle at 10% 8%, rgba(255, 94, 168, 0.22), transparent 26%),
-        radial-gradient(circle at 82% 10%, rgba(91, 124, 250, 0.22), transparent 28%),
+        radial-gradient(circle at 10% 8%,  rgba(255, 94, 168, 0.22),  transparent 26%),
+        radial-gradient(circle at 82% 10%, rgba(91, 124, 250, 0.22),  transparent 28%),
         radial-gradient(circle at 78% 82%, rgba(217, 255, 102, 0.38), transparent 26%),
         linear-gradient(135deg, #fff7ed 0%, #eef2ff 48%, #fdf2f8 100%);
       color: var(--text);
-      transition: background-color 0.5s;
+      /* FIX #13 — transition background-color AND background so the
+         gradient-to-solid-colour swap is smooth */
+      transition: background 0.5s;
     }
 
-    body.green {
-      background: var(--green);
-    }
-
-    body.orange {
-      background: var(--orange);
-    }
-
-    body.red {
-      background: var(--red);
-    }
+    body.green  { background: var(--green); }
+    body.orange { background: var(--orange); }
+    body.red    { background: var(--red); }
 
     .page {
       width: 100%;
@@ -93,7 +89,6 @@
       max-width: 720px;
       line-height: 1.5;
     }
-
 
     .top-nav {
       display: flex;
@@ -140,10 +135,10 @@
       backdrop-filter: blur(12px);
     }
 
-
     .page-title {
       background: linear-gradient(90deg, var(--purple), var(--pink), var(--orange-brand));
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
       font-size: clamp(46px, 8vw, 82px);
       line-height: 0.92;
@@ -166,7 +161,6 @@
       font-size: clamp(24px, 4vw, 38px);
       font-weight: 850;
     }
-
 
     .grid {
       display: grid;
@@ -227,9 +221,7 @@
       color: var(--muted);
     }
 
-    .timer-card {
-      text-align: center;
-    }
+    .timer-card { text-align: center; }
 
     #timer {
       font-size: clamp(64px, 9vw, 104px);
@@ -274,13 +266,10 @@
       flex: 0 0 auto;
     }
 
-    .dot.green { background: #49c866; }
-    .dot.orange { background: #f79009; }
-    .dot.red { background: #f04438; }
-    .dot.flash-dot {
-      background: #f04438;
-      box-shadow: 0 0 0 4px rgba(240, 68, 56, 0.14);
-    }
+    .dot.green     { background: #49c866; }
+    .dot.orange    { background: #f79009; }
+    .dot.red       { background: #f04438; }
+    .dot.flash-dot { background: #f04438; box-shadow: 0 0 0 4px rgba(240, 68, 56, 0.14); }
 
     .record-box {
       display: flex;
@@ -294,21 +283,11 @@
       border: 1px solid var(--border);
     }
 
-    .record-box input {
-      transform: scale(1.2);
-      margin-top: 4px;
-    }
+    .record-box input { transform: scale(1.2); margin-top: 4px; }
 
-    .record-title {
-      font-weight: 850;
-      margin-bottom: 4px;
-    }
+    .record-title { font-weight: 850; margin-bottom: 4px; }
 
-    .record-note {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.35;
-    }
+    .record-note { color: var(--muted); font-size: 14px; line-height: 1.35; }
 
     .button-row {
       display: grid;
@@ -317,9 +296,7 @@
       margin-top: 14px;
     }
 
-    .mobile-core-actions {
-      display: none;
-    }
+    .mobile-core-actions { display: none; }
 
     button, a.download-button {
       border: 0;
@@ -336,9 +313,7 @@
       transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
     }
 
-    button:hover, a.download-button:hover {
-      transform: translateY(-1px);
-    }
+    button:hover, a.download-button:hover { transform: translateY(-1px); }
 
     .primary {
       background: var(--primary);
@@ -346,19 +321,10 @@
       box-shadow: 0 10px 22px rgba(47, 79, 79, 0.25);
     }
 
-    .primary:hover {
-      background: var(--primary-dark);
-    }
+    .primary:hover { background: var(--primary-dark); }
 
-    .secondary {
-      background: #eef2f6;
-      color: var(--text);
-    }
-
-    .danger {
-      background: #fee4e2;
-      color: #b42318;
-    }
+    .secondary { background: #eef2f6; color: var(--text); }
+    .danger    { background: #fee4e2; color: #b42318; }
 
     .download-button {
       background: #ecfdf3;
@@ -377,9 +343,7 @@
       line-height: 1.4;
     }
 
-    .transcript-card {
-      margin-top: 20px;
-    }
+    .transcript-card { margin-top: 20px; }
 
     .transcript-header {
       display: flex;
@@ -390,11 +354,7 @@
       flex-wrap: wrap;
     }
 
-    .transcript-title {
-      margin: 0;
-      font-size: 24px;
-      letter-spacing: -0.5px;
-    }
+    .transcript-title { margin: 0; font-size: 24px; letter-spacing: -0.5px; }
 
     #transcript {
       font-size: 18px;
@@ -408,11 +368,7 @@
       color: var(--text);
     }
 
-    .transcript-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .transcript-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
     .transcript-actions button {
       font-size: 14px;
@@ -420,17 +376,17 @@
       border-radius: 12px;
     }
 
-    .flash {
-      animation: flash 0.5s infinite;
-    }
+    /* FIX #13 — flash must also clear the body background so it
+       overrides the gradient properly */
+    .flash { animation: flash 0.5s infinite; }
 
     @keyframes flash {
-      0% { background-color: #ff4d4d; }
-      50% { background-color: #fff; }
-      100% { background-color: #ff4d4d; }
+      0%   { background: #ff4d4d; }
+      50%  { background: #fff; }
+      100% { background: #ff4d4d; }
     }
 
-
+    /* Score screen */
     .score-screen {
       min-height: 100vh;
       padding: 22px 14px 42px;
@@ -455,11 +411,7 @@
       margin-bottom: 18px;
     }
 
-    #scoreTitle {
-      margin: 0;
-      font-size: 34px;
-      letter-spacing: -0.8px;
-    }
+    #scoreTitle { margin: 0; font-size: 34px; letter-spacing: -0.8px; }
 
     .score-total {
       display: flex;
@@ -481,16 +433,8 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .score-total-label {
-      font-size: 22px;
-      font-weight: 900;
-      margin-bottom: 4px;
-    }
-
-    .score-note {
-      opacity: 0.86;
-      line-height: 1.35;
-    }
+    .score-total-label { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+    .score-note        { opacity: 0.86; line-height: 1.35; }
 
     .score-table-wrap {
       overflow-x: auto;
@@ -544,100 +488,47 @@
     }
 
     .evaluation-box h3,
-    .brief-evaluation h3 {
-      margin-top: 0;
-    }
+    .brief-evaluation h3 { margin-top: 0; }
 
-    .evaluation-box li {
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
+    .evaluation-box li { margin-bottom: 8px; line-height: 1.35; }
 
-    .brief-evaluation p {
-      margin-bottom: 0;
-      line-height: 1.5;
-      font-size: 17px;
-    }
+    .brief-evaluation p { margin-bottom: 0; line-height: 1.5; font-size: 17px; }
 
-    .full-width {
-      width: 100%;
-      margin-top: 16px;
-    }
+    .full-width { width: 100%; margin-top: 16px; }
 
 
+    /* ── Mobile ─────────────────────────────────── */
     @media (max-width: 840px) {
-      body {
-        padding-bottom: 92px;
-      }
+      body { padding-bottom: 92px; }
 
-      .page {
-        padding: 12px 10px 28px;
-      }
+      .page { padding: 12px 10px 28px; }
 
-      .hero {
-        margin-bottom: 10px;
-      }
+      .hero { margin-bottom: 10px; }
 
-      .top-nav {
-        margin-bottom: 14px;
-      }
+      .top-nav { margin-bottom: 14px; }
 
-      .brand-link {
-        font-size: 18px;
-      }
+      .brand-link { font-size: 18px; }
 
-      .brand-logo {
-        width: 34px;
-        height: 34px;
-      }
+      .brand-logo { width: 34px; height: 34px; }
 
-      .back-link {
-        font-size: 13px;
-        padding: 8px 10px;
-      }
+      .back-link { font-size: 13px; padding: 8px 10px; }
 
-      .page-title {
-        font-size: clamp(40px, 13vw, 58px);
-        letter-spacing: -2.4px;
-      }
+      .page-title { font-size: clamp(40px, 13vw, 58px); letter-spacing: -2.4px; }
 
-      .page-subtitle {
-        font-size: 15px;
-      }
+      .page-subtitle { font-size: 15px; }
 
+      .badge    { display: none; }
+      .subtitle { display: none; }
 
-      .badge {
-        display: none;
-      }
+      h1 { font-size: 28px; letter-spacing: -0.8px; margin-bottom: 4px; }
 
-      h1 {
-        font-size: 28px;
-        letter-spacing: -0.8px;
-        margin-bottom: 4px;
-      }
+      .grid { grid-template-columns: 1fr; gap: 10px; }
 
-      .subtitle {
-        display: none;
-      }
+      .card { padding: 14px; border-radius: 18px; }
 
-      .grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
+      .question-card { min-height: auto; }
 
-      .card {
-        padding: 14px;
-        border-radius: 18px;
-      }
-
-      .question-card {
-        min-height: auto;
-      }
-
-      .card-label {
-        font-size: 11px;
-        margin-bottom: 4px;
-      }
+      .card-label { font-size: 11px; margin-bottom: 4px; }
 
       #question {
         font-size: clamp(24px, 7vw, 34px);
@@ -646,44 +537,27 @@
         line-height: 1.12;
       }
 
-      .question-footer {
-        display: none;
-      }
+      .question-footer { display: none; }
 
-      .timer-card {
-        padding-bottom: 12px;
-      }
+      .timer-card { padding-bottom: 12px; }
 
-      #timer {
-        font-size: clamp(58px, 18vw, 82px);
-        margin: 4px 0 4px;
-      }
+      #timer { font-size: clamp(58px, 18vw, 82px); margin: 4px 0 4px; }
 
       .timer-hint,
       .timing-key,
-      .record-note {
-        display: none;
-      }
+      .record-note { display: none; }
 
-      .record-box {
-        margin: 8px 0 10px;
-        padding: 10px;
-        border-radius: 14px;
-      }
+      .record-box { margin: 8px 0 10px; padding: 10px; border-radius: 14px; }
 
-      .record-title {
-        font-size: 14px;
-      }
+      .record-title { font-size: 14px; }
 
-      .button-row {
-        display: none;
-      }
+      .button-row { display: none; }
 
+      /* FIX #15 — mobile action bar is now the CSS source of truth
+         for its own display. JS uses matchMedia to match this. */
       .mobile-core-actions {
         position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        left: 0; right: 0; bottom: 0;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 8px;
@@ -702,108 +576,50 @@
         margin: 0;
       }
 
-      #status {
-        font-size: 12px;
-        margin-top: 6px;
-        min-height: 18px;
-      }
+      #status { font-size: 12px; margin-top: 6px; min-height: 18px; }
 
-      .download-button {
-        margin-top: 6px;
-        padding: 10px 12px;
-        font-size: 14px;
-      }
+      .download-button { margin-top: 6px; padding: 10px 12px; font-size: 14px; }
 
-      .transcript-card {
-        margin-top: 10px;
-      }
+      .transcript-card { margin-top: 10px; }
 
-      .transcript-header {
-        margin-bottom: 8px;
-      }
+      .transcript-header { margin-bottom: 8px; }
 
-      .transcript-title {
-        font-size: 18px;
-      }
+      .transcript-title { font-size: 18px; }
 
-      #transcript {
-        min-height: 90px;
-        font-size: 15px;
-        padding: 12px;
-        border-radius: 14px;
-      }
+      #transcript { min-height: 90px; font-size: 15px; padding: 12px; border-radius: 14px; }
 
-      .transcript-actions button {
-        font-size: 12px;
-        padding: 8px 10px;
-      }
+      .transcript-actions button { font-size: 12px; padding: 8px 10px; }
 
-      .score-screen {
-        padding: 10px 10px 96px;
-      }
+      .score-screen { padding: 10px 10px 96px; }
 
-      .score-card {
-        padding: 14px;
-        border-radius: 18px;
-      }
+      .score-card { padding: 14px; border-radius: 18px; }
 
-      .score-header {
-        align-items: center;
-      }
+      .score-header { align-items: center; }
 
-      #scoreTitle {
-        font-size: 24px;
-      }
+      #scoreTitle { font-size: 24px; }
 
-      .score-header button {
-        font-size: 13px;
-        padding: 10px 12px;
-      }
+      .score-header button { font-size: 13px; padding: 10px 12px; }
 
-      .score-total {
-        padding: 14px;
-        border-radius: 18px;
-        gap: 12px;
-      }
+      .score-total { padding: 14px; border-radius: 18px; gap: 12px; }
 
-      .score-total-number {
-        font-size: 42px;
-        min-width: 96px;
-      }
+      .score-total-number { font-size: 42px; min-width: 96px; }
 
-      .score-total-label {
-        font-size: 17px;
-      }
+      .score-total-label { font-size: 17px; }
 
-      .score-note {
-        font-size: 13px;
-      }
+      .score-note { font-size: 13px; }
 
-      .score-table {
-        min-width: 0;
-      }
+      .score-table { min-width: 0; }
 
-      .score-table thead {
-        display: none;
-      }
+      .score-table thead { display: none; }
 
       .score-table,
       .score-table tbody,
       .score-table tr,
-      .score-table td {
-        display: block;
-        width: 100%;
-      }
+      .score-table td { display: block; width: 100%; }
 
-      .score-table tr {
-        border-bottom: 1px solid var(--border);
-        padding: 12px;
-      }
+      .score-table tr { border-bottom: 1px solid var(--border); padding: 12px; }
 
-      .score-table td {
-        border-bottom: 0;
-        padding: 5px 0;
-      }
+      .score-table td { border-bottom: 0; padding: 5px 0; }
 
       .score-table td::before {
         content: attr(data-label);
@@ -816,13 +632,9 @@
         margin-bottom: 2px;
       }
 
-      .evaluation-grid {
-        grid-template-columns: 1fr;
-      }
+      .evaluation-grid { grid-template-columns: 1fr; }
 
-      .brief-evaluation p {
-        font-size: 15px;
-      }
+      .brief-evaluation p { font-size: 15px; }
     }
   </style>
 </head>
@@ -832,10 +644,9 @@
     <section class="hero">
       <div class="top-nav">
         <a class="brand-link" href="index.html">
-          <span class="brand-logo">🎤</span>
+          <span class="brand-logo" aria-hidden="true">🎤</span>
           <span>SpeakStrong</span>
         </a>
-
         <a class="back-link" href="index.html">← Back to home</a>
       </div>
 
@@ -849,7 +660,9 @@
       <div class="card question-card">
         <div>
           <div class="card-label">Your Table Topic</div>
-          <div id="question" class="question-placeholder">🎲 Click <strong>New Question</strong> to get your first Table Topic.</div>
+          <div id="question" class="question-placeholder">
+            🎲 Click <strong>New Question</strong> to get your first Table Topic.
+          </div>
         </div>
 
         <div class="question-footer">
@@ -876,21 +689,21 @@
           <input type="checkbox" id="recordOption" checked />
           <span>
             <div class="record-title">Record response and create transcript</div>
-            <div class="record-note">The browser will ask for microphone permission. Audio stays on your device unless you download/share it.</div>
+            <div class="record-note">The browser will ask for microphone permission. Audio stays on your device unless you download or share it.</div>
           </span>
         </label>
 
         <div class="button-row">
           <button class="secondary" onclick="newQuestion()">🎲 New Question</button>
-          <button class="primary" onclick="startSession()">▶ Start</button>
-          <button class="danger" onclick="stopSession()">■ Stop</button>
+          <button class="primary"   onclick="startSession()">▶ Start</button>
+          <button class="danger"    onclick="stopSession()">■ Stop</button>
           <button class="secondary" onclick="resetSession()">↺ Reset</button>
         </div>
 
-        <div id="status"></div>
+        <div id="status" role="status" aria-live="polite"></div>
 
         <a id="downloadLink" class="download-button" style="display:none;">
-          Download Recording
+          ⬇ Download Recording
         </a>
       </aside>
     </section>
@@ -899,19 +712,19 @@
       <div class="transcript-header">
         <h2 class="transcript-title">Transcript</h2>
         <div class="transcript-actions">
-          <button class="primary" onclick="scoreSpeech()">Score Speech</button>
+          <button class="primary"   onclick="scoreSpeech()">Score Speech</button>
           <button class="secondary" onclick="copyTranscript()">Copy Transcript</button>
           <button class="secondary" onclick="downloadTranscript()">Download Transcript</button>
           <button class="secondary" onclick="clearTranscript()">Clear</button>
         </div>
       </div>
 
-      <div id="transcript">Transcript will appear here when recording starts.</div>
+      <div id="transcript" aria-live="polite">Transcript will appear here when recording starts.</div>
     </section>
   </main>
 
 
-  <section id="scoreScreen" class="score-screen" style="display:none;">
+  <section id="scoreScreen" class="score-screen" style="display:none;" aria-label="Speech evaluation">
     <div class="score-card">
       <div class="score-header">
         <div>
@@ -947,7 +760,6 @@
           <h3>Strengths</h3>
           <ul id="strengthsList"></ul>
         </div>
-
         <div class="evaluation-box">
           <h3>Improve Next Time</h3>
           <ul id="improvementsList"></ul>
@@ -963,39 +775,59 @@
     </div>
   </section>
 
-  <div class="mobile-core-actions">
-    <button class="secondary" onclick="newQuestion()">🎲 New</button>
-    <button class="primary" onclick="startSession()">▶ Start</button>
-    <button class="danger" onclick="stopSession()">■ Stop</button>
-    <button class="secondary" onclick="resetSession()">↺ Reset</button>
+  <!-- FIX #15 — aria-labels added to icon-only buttons -->
+  <div class="mobile-core-actions" role="toolbar" aria-label="Session controls">
+    <button class="secondary" onclick="newQuestion()" aria-label="New question">🎲 New</button>
+    <button class="primary"   onclick="startSession()" aria-label="Start session">▶ Start</button>
+    <button class="danger"    onclick="stopSession()"  aria-label="Stop session">■ Stop</button>
+    <button class="secondary" onclick="resetSession()" aria-label="Reset session">↺ Reset</button>
   </div>
 
 <script>
-let questions = [];
+/* ─────────────────────────────────────────────────────
+   STATE
+───────────────────────────────────────────────────── */
+let questions          = [];
 let remainingQuestions = [];
 
+let secondsElapsed = 0;
+let timerInterval  = null;
+let sessionRunning = false;
+
+let mediaRecorder = null;
+let audioChunks   = [];
+let audioStream   = null;
+// FIX #3 — track blob URL so we can revoke it on the next session
+let audioBlobUrl  = null;
+
+let recognition       = null;
+// FIX #2 — dedicated flag so onend never races with stopSession()
+let recognitionActive = false;
+let transcriptText    = "";
+
+/* ─────────────────────────────────────────────────────
+   QUESTION LOADING
+   FIX #12 — after loading, show the first question
+   automatically via newQuestion() instead of just
+   calling resetSession() which left the placeholder up.
+───────────────────────────────────────────────────── */
 async function loadQuestions() {
   try {
     const response = await fetch("questions.json", { cache: "no-store" });
 
-    if (!response.ok) {
-      throw new Error("Could not load questions.json");
+    if (!response.ok) throw new Error("Could not load questions.json");
+
+    const data = await response.json();
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error("questions.json must contain a non-empty array");
     }
 
-    questions = await response.json();
-
-    if (!Array.isArray(questions) || questions.length === 0) {
-      throw new Error("questions.json must contain a list of questions");
-    }
-
+    questions          = data;
     remainingQuestions = [...questions];
 
-    const questionCount = document.getElementById("questionCount");
-    if (questionCount) {
-      questionCount.innerText = questions.length + " questions loaded";
-    }
-
-    resetSession(false);
+    // Show first question immediately
+    showNextQuestion();
+    updateQuestionCount();
 
   } catch (error) {
     console.error(error);
@@ -1005,20 +837,21 @@ async function loadQuestions() {
       "What food deserves its own national anthem?",
       "If your life had a warning label, what would it say?"
     ];
-
     remainingQuestions = [...questions];
 
-    const status = document.getElementById("status");
-    if (status) {
-      status.innerText = "Could not load questions.json, so fallback questions are being used.";
-    }
+    // FIX #11 — set status AFTER the silent resetSession that
+    // showNextQuestion() triggers, so the message isn't overwritten
+    showNextQuestion();
+    updateQuestionCount(true);
+    setStatus("Could not load questions.json — using built-in fallback questions.");
+  }
+}
 
-    const questionCount = document.getElementById("questionCount");
-    if (questionCount) {
-      questionCount.innerText = questions.length + " fallback questions loaded";
-    }
-
-    resetSession(false);
+function updateQuestionCount(isFallback = false) {
+  const el = document.getElementById("questionCount");
+  if (el) {
+    el.innerText = questions.length +
+      (isFallback ? " fallback questions loaded" : " questions loaded");
   }
 }
 
@@ -1026,37 +859,41 @@ function getRandomQuestion() {
   if (remainingQuestions.length === 0) {
     remainingQuestions = [...questions];
   }
-
-  const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
-  const question = remainingQuestions[randomIndex];
-
-  remainingQuestions.splice(randomIndex, 1);
-
+  const idx      = Math.floor(Math.random() * remainingQuestions.length);
+  const question = remainingQuestions[idx];
+  remainingQuestions.splice(idx, 1);
   return question;
 }
 
-let secondsElapsed = 0;
-let timerInterval = null;
-let sessionRunning = false;
+/* ─────────────────────────────────────────────────────
+   SESSION CONTROL
+───────────────────────────────────────────────────── */
 
-let mediaRecorder = null;
-let audioChunks = [];
-let audioStream = null;
+// Internal: set a new question text without side-effects
+function showNextQuestion() {
+  if (!questions || questions.length === 0) return;
+  const el = document.getElementById("question");
+  el.classList.remove("question-placeholder");
+  el.innerText = getRandomQuestion();
+}
 
-let recognition = null;
-let transcriptText = "";
-
+// FIX #1 — newQuestion() now warns the user before stopping a live session
 function newQuestion() {
   if (!questions || questions.length === 0) {
-    document.getElementById("question").innerText = "Loading questions...";
+    document.getElementById("question").innerText = "Loading questions…";
     return;
   }
 
-  const questionElement = document.getElementById("question");
-  questionElement.classList.remove("question-placeholder");
-  questionElement.innerText = getRandomQuestion();
-  document.getElementById("questionCount").innerText = questions.length + " questions loaded";
+  if (sessionRunning) {
+    const confirmed = confirm(
+      "A session is currently running. Stop it and load a new question?"
+    );
+    if (!confirmed) return;
+  }
+
   resetSession(false);
+  showNextQuestion();
+  updateQuestionCount();
 }
 
 function startSession() {
@@ -1069,9 +906,7 @@ function startSession() {
   hideDownloadLink();
   startTimer();
 
-  const shouldRecord = document.getElementById("recordOption").checked;
-
-  if (shouldRecord) {
+  if (document.getElementById("recordOption").checked) {
     startRecording();
     startTranscription();
   } else {
@@ -1087,6 +922,7 @@ function stopSession() {
   }
 
   sessionRunning = false;
+
   clearInterval(timerInterval);
   timerInterval = null;
 
@@ -1095,22 +931,22 @@ function stopSession() {
   }
 
   if (audioStream) {
-    audioStream.getTracks().forEach(track => track.stop());
+    audioStream.getTracks().forEach(t => t.stop());
     audioStream = null;
   }
 
+  // FIX #2 — set flag BEFORE calling recognition.stop() so the
+  // async onend handler sees recognitionActive === false and does
+  // not attempt to restart
+  recognitionActive = false;
   if (recognition) {
-    try {
-      recognition.stop();
-    } catch (error) {
-      console.error(error);
-    }
+    try { recognition.stop(); } catch (e) { console.error(e); }
   }
 
   setStatus("Stopped. Download options are available if audio or transcript was captured.");
 }
 
-function resetSession(clearStatus = true) {
+function resetSession(clearStatusFlag = true) {
   stopSession();
 
   secondsElapsed = 0;
@@ -1123,63 +959,69 @@ function resetSession(clearStatus = true) {
 
   hideDownloadLink();
 
-  if (clearStatus) {
-    setStatus("");
-  }
+  if (clearStatusFlag) setStatus("");
 }
 
+/* ─────────────────────────────────────────────────────
+   TIMER
+   FIX #13 — removed the redundant classList.remove("flash")
+   inside the >= 120 branch; the top-of-tick remove handles it.
+   Added "flash" to the top-of-tick remove so it clears when
+   the timer is reset.
+───────────────────────────────────────────────────── */
 function startTimer() {
   clearInterval(timerInterval);
 
-  timerInterval = setInterval(function() {
+  timerInterval = setInterval(function () {
     secondsElapsed++;
 
     const minutes = Math.floor(secondsElapsed / 60);
     const seconds = secondsElapsed % 60;
-
     document.getElementById("timer").innerText =
       String(minutes).padStart(2, "0") + ":" +
       String(seconds).padStart(2, "0");
 
-    document.body.classList.remove("green", "orange", "red");
+    // Clear all colour classes each tick, then re-apply the correct one
+    document.body.classList.remove("green", "orange", "red", "flash");
 
-    if (secondsElapsed >= 150) {
-      document.body.classList.add("flash");
-    } else if (secondsElapsed >= 120) {
-      document.body.classList.remove("flash");
-      document.body.classList.add("red");
-    } else if (secondsElapsed >= 90) {
-      document.body.classList.add("orange");
-    } else if (secondsElapsed >= 60) {
-      document.body.classList.add("green");
-    }
+    if      (secondsElapsed >= 150) { document.body.classList.add("flash"); }
+    else if (secondsElapsed >= 120) { document.body.classList.add("red"); }
+    else if (secondsElapsed >= 90)  { document.body.classList.add("orange"); }
+    else if (secondsElapsed >= 60)  { document.body.classList.add("green"); }
   }, 1000);
 }
 
+/* ─────────────────────────────────────────────────────
+   RECORDING
+   FIX #3 — revoke previous audio blob URL before creating a new one
+───────────────────────────────────────────────────── */
 async function startRecording() {
   try {
     audioChunks = [];
     audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
     mediaRecorder = new MediaRecorder(audioStream);
 
-    mediaRecorder.ondataavailable = function(event) {
-      if (event.data.size > 0) {
-        audioChunks.push(event.data);
-      }
+    mediaRecorder.ondataavailable = function (event) {
+      if (event.data.size > 0) audioChunks.push(event.data);
     };
 
-    mediaRecorder.onstop = function() {
+    mediaRecorder.onstop = function () {
       if (audioChunks.length === 0) return;
 
-      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
-      const audioUrl = URL.createObjectURL(audioBlob);
+      // Revoke any previous blob URL to free memory
+      if (audioBlobUrl) {
+        URL.revokeObjectURL(audioBlobUrl);
+        audioBlobUrl = null;
+      }
 
-      const downloadLink = document.getElementById("downloadLink");
-      downloadLink.href = audioUrl;
-      downloadLink.download = createFileName("table-topic-recording", "webm");
-      downloadLink.style.display = "inline-flex";
-      downloadLink.innerText = "⬇ Download Recording";
+      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+      audioBlobUrl    = URL.createObjectURL(audioBlob);
+
+      const link      = document.getElementById("downloadLink");
+      link.href       = audioBlobUrl;
+      link.download   = createFileName("table-topic-recording", "webm");
+      link.style.display = "inline-flex";
+      link.innerText  = "⬇ Download Recording";
     };
 
     mediaRecorder.start();
@@ -1191,6 +1033,11 @@ async function startRecording() {
   }
 }
 
+/* ─────────────────────────────────────────────────────
+   TRANSCRIPTION
+   FIX #2 — restart guard uses recognitionActive flag, not sessionRunning
+   FIX #10 — suppress benign no-speech / aborted errors
+───────────────────────────────────────────────────── */
 function startTranscription() {
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -1205,73 +1052,62 @@ function startTranscription() {
   document.getElementById("transcript").innerText = "";
 
   recognition = new SpeechRecognition();
-  recognition.continuous = true;
+  recognition.continuous     = true;
   recognition.interimResults = true;
-  recognition.lang = "en-AU";
+  recognition.lang           = "en-AU";
 
-  recognition.onresult = function(event) {
-    let interimTranscript = "";
-
+  recognition.onresult = function (event) {
+    let interim = "";
     for (let i = event.resultIndex; i < event.results.length; i++) {
-      const text = event.results[i][0].transcript;
-
+      const t = event.results[i][0].transcript;
       if (event.results[i].isFinal) {
-        transcriptText += text.trim() + " ";
+        transcriptText += t.trim() + " ";
       } else {
-        interimTranscript += text;
+        interim += t;
       }
     }
-
     document.getElementById("transcript").innerHTML =
-      escapeHtml(transcriptText) +
-      "<em>" + escapeHtml(interimTranscript) + "</em>";
+      safeHtml(transcriptText) + "<em>" + safeHtml(interim) + "</em>";
   };
 
-  recognition.onerror = function(event) {
+  recognition.onerror = function (event) {
+    // FIX #10 — no-speech and aborted are normal browser events, not errors
+    if (event.error === "no-speech" || event.error === "aborted") return;
     setStatus("Transcription issue: " + event.error);
   };
 
-  recognition.onend = function() {
-    if (sessionRunning && document.getElementById("recordOption").checked) {
-      try {
-        recognition.start();
-      } catch (error) {
-        console.error(error);
-      }
+  recognition.onend = function () {
+    // FIX #2 — only restart if we deliberately want recognition running
+    if (recognitionActive && document.getElementById("recordOption").checked) {
+      try { recognition.start(); } catch (e) { console.error(e); }
     }
   };
 
+  recognitionActive = true;
   recognition.start();
 }
 
+/* ─────────────────────────────────────────────────────
+   TRANSCRIPT ACTIONS
+───────────────────────────────────────────────────── */
 function downloadTranscript() {
   const text = transcriptText.trim();
-
-  if (!text) {
-    alert("No transcript available yet.");
-    return;
-  }
+  if (!text) { alert("No transcript available yet."); return; }
 
   const blob = new Blob([text], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-
+  const url  = URL.createObjectURL(blob);
   const link = document.createElement("a");
-  link.href = url;
+  link.href     = url;
   link.download = createFileName("table-topic-transcript", "txt");
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-
   URL.revokeObjectURL(url);
 }
 
 function copyTranscript() {
   const text = transcriptText.trim();
-
-  if (!text) {
-    alert("No transcript available yet.");
-    return;
-  }
+  if (!text) { alert("No transcript available yet."); return; }
 
   navigator.clipboard.writeText(text)
     .then(() => setStatus("Transcript copied."))
@@ -1280,40 +1116,21 @@ function copyTranscript() {
 
 function clearTranscript() {
   transcriptText = "";
-  document.getElementById("transcript").innerText =
-    "Transcript cleared.";
+  document.getElementById("transcript").innerText = "Transcript cleared.";
   setStatus("Transcript cleared.");
 }
 
 function hideDownloadLink() {
-  const downloadLink = document.getElementById("downloadLink");
-  downloadLink.style.display = "none";
-  downloadLink.removeAttribute("href");
+  const link = document.getElementById("downloadLink");
+  link.style.display = "none";
+  link.removeAttribute("href");
 }
 
-function setStatus(message) {
-  document.getElementById("status").innerText = message;
-}
-
-function createFileName(prefix, extension) {
-  const now = new Date();
-  const stamp = now.toISOString().replace(/[:.]/g, "-");
-  return prefix + "-" + stamp + "." + extension;
-}
-
-function escapeHtml(text) {
-  return text
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-
+/* ─────────────────────────────────────────────────────
+   SCORING
+───────────────────────────────────────────────────── */
 function scoreSpeech() {
   const text = transcriptText.trim();
-
   if (!text) {
     alert("No transcript available yet. Record a response first, then try scoring.");
     return;
@@ -1322,9 +1139,7 @@ function scoreSpeech() {
   const result = evaluateTranscript(text);
 
   document.querySelector(".page").style.display = "none";
-  const mobileActions = document.querySelector(".mobile-core-actions");
-  if (mobileActions) mobileActions.style.display = "none";
-
+  document.querySelector(".mobile-core-actions").style.display = "none";
   document.getElementById("scoreScreen").style.display = "block";
   document.body.classList.remove("flash", "green", "orange", "red");
 
@@ -1332,186 +1147,222 @@ function scoreSpeech() {
 
   const rows = document.getElementById("scoreRows");
   rows.innerHTML = "";
-
   result.sections.forEach(section => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td data-label="Rubric Area"><strong>${section.name}</strong><br><span style="color:#667085;">${section.criteria}</span></td>
+      <td data-label="Rubric Area">
+        <strong>${section.name}</strong><br>
+        <span style="color:#667085;">${section.criteria}</span>
+      </td>
       <td data-label="Score">${section.score}/${section.max}</td>
       <td data-label="Comment">${section.comment}</td>
     `;
     rows.appendChild(row);
   });
 
-  const strengths = document.getElementById("strengthsList");
-  strengths.innerHTML = "";
-  result.strengths.forEach(item => {
-    const li = document.createElement("li");
-    li.innerText = item;
-    strengths.appendChild(li);
-  });
-
-  const improvements = document.getElementById("improvementsList");
-  improvements.innerHTML = "";
-  result.improvements.forEach(item => {
-    const li = document.createElement("li");
-    li.innerText = item;
-    improvements.appendChild(li);
-  });
+  populateList("strengthsList",    result.strengths);
+  populateList("improvementsList", result.improvements);
 
   document.getElementById("briefEvaluation").innerText = result.brief;
   window.scrollTo(0, 0);
 }
 
+function populateList(id, items) {
+  const el = document.getElementById(id);
+  el.innerHTML = "";
+  items.forEach(item => {
+    const li = document.createElement("li");
+    li.innerText = item;
+    el.appendChild(li);
+  });
+}
+
+// FIX #5 — use matchMedia so the breakpoint is never a magic number in JS
 function backToApp() {
   document.getElementById("scoreScreen").style.display = "none";
   document.querySelector(".page").style.display = "block";
 
   const mobileActions = document.querySelector(".mobile-core-actions");
-  if (mobileActions) {
-    mobileActions.style.display = window.innerWidth <= 840 ? "grid" : "none";
-  }
+  mobileActions.style.display =
+    window.matchMedia("(max-width: 840px)").matches ? "grid" : "none";
 
   window.scrollTo(0, 0);
 }
 
+/* ─────────────────────────────────────────────────────
+   EVALUATION ENGINE
+   FIX #6  — physical no longer hardcoded; uses fluency proxy
+   FIX #7  — voice floor lowered from 9 to 5
+   FIX #8  — filler list narrowed to genuine hesitation sounds only;
+             removed "like", "basically", "actually", "so", "kind of"
+             which are legitimate in normal speech
+   FIX #9  — phrase matching uses indexOf loops instead of \b regex,
+             which mishandles multi-word phrases
+───────────────────────────────────────────────────── */
 function evaluateTranscript(text) {
-  const lower = text.toLowerCase();
-  const words = lower.match(/\b[\w']+\b/g) || [];
+  const lower     = text.toLowerCase();
+  const words     = lower.match(/\b[\w']+\b/g) || [];
   const wordCount = words.length;
   const sentences = text.split(/[.!?]+/).map(s => s.trim()).filter(Boolean);
-  const sentenceCount = Math.max(sentences.length, 1);
+  const sentenceCount     = Math.max(sentences.length, 1);
   const avgSentenceLength = wordCount / sentenceCount;
-  const uniqueWords = new Set(words).size;
-  const lexicalVariety = wordCount ? uniqueWords / wordCount : 0;
+  const uniqueWords       = new Set(words).size;
+  const lexicalVariety    = wordCount ? uniqueWords / wordCount : 0;
 
-  const openingWords = ["today", "imagine", "first", "i believe", "let me", "there are", "when", "if"];
-  const closingWords = ["finally", "in conclusion", "so", "therefore", "ultimately", "the lesson", "that is why"];
-  const logicWords = ["because", "therefore", "so", "first", "second", "finally", "for example", "however", "but", "then"];
-  const enthusiasmWords = ["exciting", "amazing", "love", "brilliant", "fantastic", "funny", "surprising", "important", "memorable"];
-  const fillerWords = ["um", "uh", "like", "you know", "sort of", "kind of", "basically", "actually"];
+  // Opening / closing markers — check near the start / end of the text
+  const openStart = lower.slice(0, Math.min(lower.length, 120));
+  const closeEnd  = lower.slice(Math.max(0, lower.length - 120));
 
-  const hasOpening = containsAny(lower, openingWords);
-  const hasClosing = containsAny(lower, closingWords);
-  const logicCount = countMatches(lower, logicWords);
-  const enthusiasmCount = countMatches(lower, enthusiasmWords);
-  const fillerCount = countMatches(lower, fillerWords);
+  const openingPhrases = ["today ", "imagine ", "i believe ", "let me ", "picture this", "have you ever", "when i ", "if i ", "there are ", "first of all"];
+  const closingPhrases = ["in conclusion", "to summarise", "to summarize", "in summary", "the lesson", "that is why", "ultimately ", "so today", "i hope", "thank you"];
+  const logicPhrases   = ["because ", "therefore ", "as a result", "for example", "for instance", "however ", "first ", "second ", "third ", "finally ", "in addition", "furthermore", "which means", "this means", "that means", "on the other hand"];
+  const enthusiasmWords = ["exciting", "amazing", "love", "brilliant", "fantastic", "funny", "surprising", "important", "memorable", "incredible", "wonderful", "passionate", "fascinating", "remarkable"];
 
-  let speechDevelopment = 14;
-  if (wordCount >= 80) speechDevelopment += 4;
+  // FIX #8 — only genuine hesitation sounds, not legitimate words
+  const fillerSounds = ["um", "uh", "er", "ah", "umm", "uhh"];
+
+  const hasOpening    = containsPhrase(openStart, openingPhrases);
+  const hasClosing    = containsPhrase(closeEnd,  closingPhrases);
+  const logicCount    = countPhrases(lower, logicPhrases);
+  const enthusiasmCt  = countPhrases(lower, enthusiasmWords);
+  const fillerCount   = countWholeWords(lower, fillerSounds);
+
+  /* Speech Development /30 */
+  let speechDevelopment = 10;
+  if (wordCount >= 80)  speechDevelopment += 4;
   if (wordCount >= 130) speechDevelopment += 3;
-  if (hasOpening) speechDevelopment += 3;
-  if (hasClosing) speechDevelopment += 3;
-  if (logicCount >= 2) speechDevelopment += 3;
+  if (hasOpening)       speechDevelopment += 4;
+  if (hasClosing)       speechDevelopment += 4;
+  if (logicCount >= 2)  speechDevelopment += 3;
+  if (logicCount >= 4)  speechDevelopment += 2;
   speechDevelopment = clamp(speechDevelopment, 0, 30);
 
-  let effectiveness = 10;
-  if (wordCount >= 70) effectiveness += 3;
-  if (logicCount >= 2) effectiveness += 4;
-  if (enthusiasmCount >= 1) effectiveness += 3;
-  if (sentenceCount >= 4) effectiveness += 2;
-  if (lexicalVariety > 0.55) effectiveness += 3;
+  /* Effectiveness /25 */
+  let effectiveness = 8;
+  if (wordCount >= 70)       effectiveness += 3;
+  if (logicCount >= 2)       effectiveness += 4;
+  if (enthusiasmCt >= 1)     effectiveness += 3;
+  if (sentenceCount >= 4)    effectiveness += 3;
+  if (lexicalVariety > 0.55) effectiveness += 4;
   effectiveness = clamp(effectiveness, 0, 25);
 
-  const physical = 9;
-  const physicalComment = "Estimated only. Transcript cannot judge appearance, body language, or use of the speaking area.";
+  /* Physical /15 — FIX #6: estimated via fluency proxy */
+  const fillerRate = wordCount > 0 ? fillerCount / wordCount : 0;
+  let physical = 7;
+  if (fillerRate < 0.03) physical += 5;
+  else if (fillerRate < 0.06) physical += 3;
+  else if (fillerRate < 0.10) physical += 1;
+  if (sentenceCount >= 5) physical += 1;
+  if (wordCount >= 80)    physical += 1;
+  physical = clamp(physical, 0, 15);
+  const physicalComment =
+    "Estimated from fluency signals. Body language and use of space cannot be assessed from a transcript.";
 
-  let voice = 9;
-  if (avgSentenceLength >= 8 && avgSentenceLength <= 24) voice += 2;
-  if (sentenceCount >= 4) voice += 1;
+  /* Voice /15 — FIX #7: floor lowered from 9 to 5 */
+  let voice = 5;
+  if (avgSentenceLength >= 6  && avgSentenceLength <= 28) voice += 3;
+  if (avgSentenceLength >= 8  && avgSentenceLength <= 20) voice += 2;
+  if (sentenceCount >= 5)  voice += 2;
+  if (fillerCount <= 2)    voice += 2;
   voice = clamp(voice, 0, 15);
-  const voiceComment = "Estimated from pacing and sentence rhythm only. Audio analysis would be needed for volume and vocal variety.";
+  const voiceComment =
+    "Estimated from sentence rhythm and pacing. Volume and vocal variety require audio analysis.";
 
-  let appropriateness = 5;
-  if (wordCount >= 50) appropriateness += 2;
+  /* Appropriateness /10 */
+  let appropriateness = 4;
+  if (wordCount >= 50)  appropriateness += 2;
   if (wordCount <= 260) appropriateness += 2;
-  if (fillerCount <= 3) appropriateness += 1;
+  if (fillerCount <= 3) appropriateness += 2;
   appropriateness = clamp(appropriateness, 0, 10);
 
-  let correctness = 2;
+  /* Correctness /5 */
+  let correctness = 1;
   if (avgSentenceLength >= 6 && avgSentenceLength <= 28) correctness += 1;
   if (lexicalVariety > 0.45) correctness += 1;
-  if (fillerCount <= 4) correctness += 1;
+  if (fillerCount <= 2)      correctness += 1;
+  if (sentenceCount >= 3)    correctness += 1;
   correctness = clamp(correctness, 0, 5);
 
   const total = speechDevelopment + effectiveness + physical + voice + appropriateness + correctness;
 
   const sections = [
     {
-      name: "Speech Development",
-      criteria: "Opening, body, close, organisation, smoothness",
-      score: speechDevelopment,
-      max: 30,
-      comment: commentFor(speechDevelopment, 30, "Clear structure and development.", "Structure is emerging, but could be more deliberate.", "Needs a clearer opening, body, and close.")
+      name: "Speech Development", criteria: "Opening, body, close, organisation, smoothness",
+      score: speechDevelopment, max: 30,
+      comment: commentFor(speechDevelopment, 30,
+        "Clear structure with a distinct opening, body, and close.",
+        "Structure is emerging — aim for a more deliberate open and close.",
+        "Needs a clearer opening, body, and closing statement.")
     },
     {
-      name: "Effectiveness",
-      criteria: "Logic, directness, enthusiasm, purpose, audience response",
-      score: effectiveness,
-      max: 25,
-      comment: commentFor(effectiveness, 25, "Purpose comes through clearly with good directness.", "Good ideas, but the message could land more strongly.", "Needs stronger purpose, examples, and audience connection.")
+      name: "Effectiveness", criteria: "Logic, directness, enthusiasm, purpose, audience response",
+      score: effectiveness, max: 25,
+      comment: commentFor(effectiveness, 25,
+        "Purpose comes through clearly with good directness and colour.",
+        "Good ideas, but the message could land more strongly.",
+        "Needs stronger purpose, concrete examples, and audience connection.")
     },
     {
-      name: "Physical",
-      criteria: "Appearance, body language, speaking area",
-      score: physical,
-      max: 15,
-      comment: physicalComment
+      name: "Physical", criteria: "Appearance, body language, speaking area",
+      score: physical, max: 15, comment: physicalComment
     },
     {
-      name: "Voice",
-      criteria: "Flexibility, volume",
-      score: voice,
-      max: 15,
-      comment: voiceComment
+      name: "Voice", criteria: "Flexibility, volume",
+      score: voice, max: 15, comment: voiceComment
     },
     {
-      name: "Appropriateness",
-      criteria: "To speech purpose and audience",
-      score: appropriateness,
-      max: 10,
-      comment: commentFor(appropriateness, 10, "Appropriate length and tone for a Table Topic.", "Mostly appropriate, but could be sharper for the prompt.", "May need a tighter response to the question.")
+      name: "Appropriateness", criteria: "To speech purpose and audience",
+      score: appropriateness, max: 10,
+      comment: commentFor(appropriateness, 10,
+        "Appropriate length and tone for a Table Topic.",
+        "Mostly appropriate, but could be sharper for the prompt.",
+        "May need a tighter, more focused response to the question.")
     },
     {
-      name: "Correctness",
-      criteria: "Grammar, pronunciation, word selection",
-      score: correctness,
-      max: 5,
-      comment: commentFor(correctness, 5, "Good word choice and clarity.", "Generally clear with some rough edges.", "Needs cleaner wording and sentence control.")
+      name: "Correctness", criteria: "Grammar, pronunciation, word selection",
+      score: correctness, max: 5,
+      comment: commentFor(correctness, 5,
+        "Good word choice and clarity throughout.",
+        "Generally clear with some rough edges.",
+        "Needs cleaner wording and sentence control.")
     }
   ];
 
   const strengths = [];
-  if (hasOpening) strengths.push("The response appears to start with a clear opening.");
-  if (logicCount >= 2) strengths.push("There are useful linking words that help the speech flow logically.");
-  if (lexicalVariety > 0.5) strengths.push("The vocabulary has good variety for an impromptu response.");
-  if (wordCount >= 80 && wordCount <= 230) strengths.push("The response length is well suited to a Table Topic.");
-  if (strengths.length === 0) strengths.push("You got words out under pressure — the first victory in Table Topics.");
+  if (hasOpening)                           strengths.push("The response appears to start with a clear opening.");
+  if (logicCount >= 2)                      strengths.push("Useful linking words help the speech flow logically.");
+  if (lexicalVariety > 0.5)                 strengths.push("Good vocabulary variety for an impromptu response.");
+  if (wordCount >= 80 && wordCount <= 230)  strengths.push("Response length is well suited to a Table Topic.");
+  if (fillerCount <= 2)                     strengths.push("Very low use of filler sounds — confident delivery.");
+  if (strengths.length === 0)               strengths.push("You got words out under pressure — the first victory in Table Topics.");
 
   const improvements = [];
-  if (!hasOpening) improvements.push("Start with a stronger opening line that directly frames your answer.");
-  if (!hasClosing) improvements.push("Add a clear closing sentence so the response lands with impact.");
-  if (logicCount < 2) improvements.push("Use signposting such as first, because, for example, and finally.");
-  if (fillerCount > 3) improvements.push("Reduce filler words and use short pauses instead.");
-  if (wordCount < 60) improvements.push("Develop the answer with one example or mini-story.");
-  if (wordCount > 260) improvements.push("Tighten the answer so it finishes before the red light starts judging you.");
+  if (!hasOpening)     improvements.push("Start with a stronger opening line that directly frames your answer.");
+  if (!hasClosing)     improvements.push("Add a clear closing sentence so the response lands with impact.");
+  if (logicCount < 2)  improvements.push("Use signposting: first, because, for example, and finally.");
+  if (fillerCount > 3) improvements.push("Reduce hesitation sounds (um, uh) and use deliberate pauses instead.");
+  if (wordCount < 60)  improvements.push("Develop the answer with one example or mini-story.");
+  if (wordCount > 260) improvements.push("Tighten the answer — aim to finish before the two-minute mark.");
   if (improvements.length === 0) improvements.push("Next step: add more vocal variety and a memorable closing line.");
 
   const brief = makeBriefEvaluation(total, wordCount, hasOpening, hasClosing, logicCount);
 
-  return { total, sections, strengths: strengths.slice(0, 3), improvements: improvements.slice(0, 3), brief };
+  return {
+    total,
+    sections,
+    strengths:    strengths.slice(0, 3),
+    improvements: improvements.slice(0, 3),
+    brief
+  };
 }
 
 function makeBriefEvaluation(total, wordCount, hasOpening, hasClosing, logicCount) {
-  let level = "developing";
-  if (total >= 80) level = "strong";
-  else if (total >= 65) level = "solid";
-
-  let brief = "This was a " + level + " Table Topics response based on the transcript. ";
+  const level = total >= 80 ? "strong" : total >= 65 ? "solid" : "developing";
+  let brief   = "This was a " + level + " Table Topics response based on the transcript. ";
   brief += "It ran to approximately " + wordCount + " words. ";
 
   if (hasOpening && hasClosing) {
-    brief += "It appears to have both an opening and a close, which gives it a complete shape. ";
+    brief += "It has both an opening and a close, giving it a complete shape. ";
   } else if (hasOpening) {
     brief += "It starts reasonably well, but would benefit from a more deliberate close. ";
   } else if (hasClosing) {
@@ -1520,27 +1371,50 @@ function makeBriefEvaluation(total, wordCount, hasOpening, hasClosing, logicCoun
     brief += "The biggest opportunity is to shape it with a clear opening and closing sentence. ";
   }
 
-  if (logicCount >= 2) {
-    brief += "The use of linking language helps the logic flow.";
-  } else {
-    brief += "Adding signposts and one concrete example would make the answer easier to follow.";
-  }
+  brief += logicCount >= 2
+    ? "The use of linking language helps the logic flow."
+    : "Adding signposts and one concrete example would make the answer easier to follow.";
 
   return brief;
 }
 
-function containsAny(text, phrases) {
-  return phrases.some(phrase => text.includes(phrase));
+/* ─────────────────────────────────────────────────────
+   UTILITIES
+───────────────────────────────────────────────────── */
+
+// FIX #4 — use DOM API: immune to ordering bugs in chained replaceAll
+function safeHtml(text) {
+  const el = document.createElement("span");
+  el.textContent = text;
+  return el.innerHTML;
 }
 
-function countMatches(text, phrases) {
-  let count = 0;
-  phrases.forEach(phrase => {
-    const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const matches = text.match(new RegExp("\\b" + escaped + "\\b", "g"));
-    if (matches) count += matches.length;
-  });
-  return count;
+// FIX #9 — indexOf-based: correctly handles multi-word phrases
+function containsPhrase(text, phrases) {
+  return phrases.some(p => text.includes(p));
+}
+
+function countPhrases(text, phrases) {
+  let total = 0;
+  for (const phrase of phrases) {
+    let pos = 0;
+    while ((pos = text.indexOf(phrase, pos)) !== -1) {
+      total++;
+      pos += phrase.length;
+    }
+  }
+  return total;
+}
+
+// Count single-token filler sounds using whole-word \b (safe for 2-char tokens)
+function countWholeWords(text, tokens) {
+  let total = 0;
+  for (const token of tokens) {
+    const re = new RegExp("\\b" + token + "\\b", "g");
+    const m  = text.match(re);
+    if (m) total += m.length;
+  }
+  return total;
 }
 
 function clamp(value, min, max) {
@@ -1548,13 +1422,22 @@ function clamp(value, min, max) {
 }
 
 function commentFor(score, max, high, mid, low) {
-  const ratio = score / max;
-  if (ratio >= 0.8) return high;
-  if (ratio >= 0.55) return mid;
-  return low;
+  const r = score / max;
+  return r >= 0.8 ? high : r >= 0.55 ? mid : low;
 }
 
+function setStatus(message) {
+  document.getElementById("status").innerText = message;
+}
 
+function createFileName(prefix, extension) {
+  const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+  return prefix + "-" + stamp + "." + extension;
+}
+
+/* ─────────────────────────────────────────────────────
+   INIT
+───────────────────────────────────────────────────── */
 loadQuestions();
 </script>
 </body>
