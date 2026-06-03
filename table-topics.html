@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Table Topics Trainer | SpeakStrong</title>
+
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #667085;
+      --primary: #2f4f4f;
+      --primary-dark: #203737;
+      --border: #e4e7ec;
+      --soft: #f9fafb;
+      --green: #b7f7c2;
+      --orange: #ffd29a;
+      --red: #ff8a8a;
+      --shadow: 0 20px 45px rgba(31, 41, 51, 0.12);
+      --pink: #ff5ea8;
+      --blue: #5b7cfa;
+      --purple: #7c3aed;
+      --orange-brand: #ff9f1c;
+      --lime: #d9ff66;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255, 94, 168, 0.22), transparent 26%),
+        radial-gradient(circle at 82% 10%, rgba(91, 124, 250, 0.22), transparent 28%),
+        radial-gradient(circle at 78% 82%, rgba(217, 255, 102, 0.38), transparent 26%),
+        linear-gradient(135deg, #fff7ed 0%, #eef2ff 48%, #fdf2f8 100%);
+      color: var(--text);
+      transition: background-color 0.5s;
+    }
+
+    body.green {
+      background: var(--green);
+    }
+
+    body.orange {
+      background: var(--orange);
+    }
+
+    body.red {
+      background: var(--red);
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 18px 44px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      margin: 0 0 10px;
+      letter-spacing: -1.8px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0 auto;
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 950;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: 0 12px 30px rgba(91, 124, 250, 0.28);
+      transform: rotate(-6deg);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-weight: 850;
+      border-radius: 999px;
+      padding: 10px 14px;
+      backdrop-filter: blur(12px);
+    }
+
+
+    .page-title {
+      background: linear-gradient(90deg, var(--purple), var(--pink), var(--orange-brand));
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: clamp(46px, 8vw, 82px);
+      line-height: 0.92;
+      letter-spacing: -3.5px;
+      font-weight: 950;
+      margin: 0 0 10px;
+    }
+
+    .page-subtitle {
+      font-size: clamp(17px, 2.2vw, 22px);
+      color: #475467;
+      margin: 0 auto;
+      max-width: 720px;
+      line-height: 1.4;
+      font-weight: 650;
+    }
+
+    .question-placeholder {
+      color: var(--muted);
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 850;
+    }
+
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.75fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(228, 231, 236, 0.9);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      backdrop-filter: blur(12px);
+    }
+
+    .question-card {
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-label {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 12px;
+    }
+
+    #question {
+      font-size: clamp(30px, 4.5vw, 52px);
+      line-height: 1.14;
+      font-weight: 850;
+      letter-spacing: -1px;
+      margin: 18px 0 24px;
+    }
+
+    .question-footer {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: var(--soft);
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .timer-card {
+      text-align: center;
+    }
+
+    #timer {
+      font-size: clamp(64px, 9vw, 104px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -3px;
+      margin: 16px 0 10px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-hint {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+
+    .timing-key {
+      display: grid;
+      gap: 8px;
+      margin: 18px 0 20px;
+      text-align: left;
+    }
+
+    .key-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    .dot.green { background: #49c866; }
+    .dot.orange { background: #f79009; }
+    .dot.red { background: #f04438; }
+    .dot.flash-dot {
+      background: #f04438;
+      box-shadow: 0 0 0 4px rgba(240, 68, 56, 0.14);
+    }
+
+    .record-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      background: var(--soft);
+      border-radius: 18px;
+      text-align: left;
+      margin: 16px 0 18px;
+      border: 1px solid var(--border);
+    }
+
+    .record-box input {
+      transform: scale(1.2);
+      margin-top: 4px;
+    }
+
+    .record-title {
+      font-weight: 850;
+      margin-bottom: 4px;
+    }
+
+    .record-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mobile-core-actions {
+      display: none;
+    }
+
+    button, a.download-button {
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 16px;
+      font-weight: 850;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    button:hover, a.download-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 10px 22px rgba(47, 79, 79, 0.25);
+    }
+
+    .primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .secondary {
+      background: #eef2f6;
+      color: var(--text);
+    }
+
+    .danger {
+      background: #fee4e2;
+      color: #b42318;
+    }
+
+    .download-button {
+      background: #ecfdf3;
+      color: #027a48;
+      margin-top: 12px;
+      width: 100%;
+      border: 1px solid #abefc6;
+    }
+
+    #status {
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 750;
+      margin-top: 14px;
+      line-height: 1.4;
+    }
+
+    .transcript-card {
+      margin-top: 20px;
+    }
+
+    .transcript-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .transcript-title {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    #transcript {
+      font-size: 18px;
+      line-height: 1.55;
+      min-height: 150px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      text-align: left;
+      color: var(--text);
+    }
+
+    .transcript-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .transcript-actions button {
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 12px;
+    }
+
+    .flash {
+      animation: flash 0.5s infinite;
+    }
+
+    @keyframes flash {
+      0% { background-color: #ff4d4d; }
+      50% { background-color: #fff; }
+      100% { background-color: #ff4d4d; }
+    }
+
+
+    .score-screen {
+      min-height: 100vh;
+      padding: 22px 14px 42px;
+      background: var(--bg);
+    }
+
+    .score-card {
+      max-width: 980px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .score-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    #scoreTitle {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: -0.8px;
+    }
+
+    .score-total {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      background: var(--primary);
+      color: white;
+      padding: 20px;
+      border-radius: 22px;
+      margin-bottom: 18px;
+    }
+
+    .score-total-number {
+      font-size: 58px;
+      line-height: 1;
+      font-weight: 950;
+      min-width: 160px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .score-total-label {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .score-note {
+      opacity: 0.86;
+      line-height: 1.35;
+    }
+
+    .score-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      margin: 18px 0;
+    }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+      background: white;
+    }
+
+    .score-table th,
+    .score-table td {
+      text-align: left;
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .score-table th {
+      background: var(--soft);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+    }
+
+    .score-table td:nth-child(2) {
+      font-weight: 900;
+      white-space: nowrap;
+      font-size: 18px;
+    }
+
+    .evaluation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .evaluation-box,
+    .brief-evaluation {
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .evaluation-box h3,
+    .brief-evaluation h3 {
+      margin-top: 0;
+    }
+
+    .evaluation-box li {
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .brief-evaluation p {
+      margin-bottom: 0;
+      line-height: 1.5;
+      font-size: 17px;
+    }
+
+    .full-width {
+      width: 100%;
+      margin-top: 16px;
+    }
+
+
+    @media (max-width: 840px) {
+      body {
+        padding-bottom: 92px;
+      }
+
+      .page {
+        padding: 12px 10px 28px;
+      }
+
+      .hero {
+        margin-bottom: 10px;
+      }
+
+      .top-nav {
+        margin-bottom: 14px;
+      }
+
+      .brand-link {
+        font-size: 18px;
+      }
+
+      .brand-logo {
+        width: 34px;
+        height: 34px;
+      }
+
+      .back-link {
+        font-size: 13px;
+        padding: 8px 10px;
+      }
+
+      .page-title {
+        font-size: clamp(40px, 13vw, 58px);
+        letter-spacing: -2.4px;
+      }
+
+      .page-subtitle {
+        font-size: 15px;
+      }
+
+
+      .badge {
+        display: none;
+      }
+
+      h1 {
+        font-size: 28px;
+        letter-spacing: -0.8px;
+        margin-bottom: 4px;
+      }
+
+      .subtitle {
+        display: none;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .card {
+        padding: 14px;
+        border-radius: 18px;
+      }
+
+      .question-card {
+        min-height: auto;
+      }
+
+      .card-label {
+        font-size: 11px;
+        margin-bottom: 4px;
+      }
+
+      #question {
+        font-size: clamp(24px, 7vw, 34px);
+        margin: 8px 0 10px;
+        min-height: 112px;
+        line-height: 1.12;
+      }
+
+      .question-footer {
+        display: none;
+      }
+
+      .timer-card {
+        padding-bottom: 12px;
+      }
+
+      #timer {
+        font-size: clamp(58px, 18vw, 82px);
+        margin: 4px 0 4px;
+      }
+
+      .timer-hint,
+      .timing-key,
+      .record-note {
+        display: none;
+      }
+
+      .record-box {
+        margin: 8px 0 10px;
+        padding: 10px;
+        border-radius: 14px;
+      }
+
+      .record-title {
+        font-size: 14px;
+      }
+
+      .button-row {
+        display: none;
+      }
+
+      .mobile-core-actions {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.94);
+        border-top: 1px solid var(--border);
+        box-shadow: 0 -10px 30px rgba(31, 41, 51, 0.12);
+        backdrop-filter: blur(12px);
+        z-index: 20;
+      }
+
+      .mobile-core-actions button {
+        font-size: 13px;
+        padding: 12px 6px;
+        border-radius: 14px;
+        margin: 0;
+      }
+
+      #status {
+        font-size: 12px;
+        margin-top: 6px;
+        min-height: 18px;
+      }
+
+      .download-button {
+        margin-top: 6px;
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+
+      .transcript-card {
+        margin-top: 10px;
+      }
+
+      .transcript-header {
+        margin-bottom: 8px;
+      }
+
+      .transcript-title {
+        font-size: 18px;
+      }
+
+      #transcript {
+        min-height: 90px;
+        font-size: 15px;
+        padding: 12px;
+        border-radius: 14px;
+      }
+
+      .transcript-actions button {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+
+      .score-screen {
+        padding: 10px 10px 96px;
+      }
+
+      .score-card {
+        padding: 14px;
+        border-radius: 18px;
+      }
+
+      .score-header {
+        align-items: center;
+      }
+
+      #scoreTitle {
+        font-size: 24px;
+      }
+
+      .score-header button {
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+
+      .score-total {
+        padding: 14px;
+        border-radius: 18px;
+        gap: 12px;
+      }
+
+      .score-total-number {
+        font-size: 42px;
+        min-width: 96px;
+      }
+
+      .score-total-label {
+        font-size: 17px;
+      }
+
+      .score-note {
+        font-size: 13px;
+      }
+
+      .score-table {
+        min-width: 0;
+      }
+
+      .score-table thead {
+        display: none;
+      }
+
+      .score-table,
+      .score-table tbody,
+      .score-table tr,
+      .score-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .score-table tr {
+        border-bottom: 1px solid var(--border);
+        padding: 12px;
+      }
+
+      .score-table td {
+        border-bottom: 0;
+        padding: 5px 0;
+      }
+
+      .score-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: var(--muted);
+        letter-spacing: 0.6px;
+        margin-bottom: 2px;
+      }
+
+      .evaluation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .brief-evaluation p {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="top-nav">
+        <a class="brand-link" href="index.html">
+          <span class="brand-logo">🎤</span>
+          <span>SpeakStrong</span>
+        </a>
+
+        <a class="back-link" href="index.html">← Back to home</a>
+      </div>
+
+      <h1 class="page-title">Table Topics Trainer</h1>
+      <p class="page-subtitle">
+        Practice impromptu speaking, build confidence and sharpen your Table Topics skills.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card question-card">
+        <div>
+          <div class="card-label">Your Table Topic</div>
+          <div id="question" class="question-placeholder">🎲 Click <strong>New Question</strong> to get your first Table Topic.</div>
+        </div>
+
+        <div class="question-footer">
+          <span class="pill" id="questionCount"></span>
+          <span class="pill">Tip: aim for 1–2 minutes</span>
+        </div>
+      </div>
+
+      <aside class="card timer-card">
+        <div class="card-label">Timer</div>
+        <div id="timer">00:00</div>
+        <div class="timer-hint">
+          The background changes like Toastmasters timing cards. Less cardboard, more drama.
+        </div>
+
+        <div class="timing-key">
+          <div class="key-row"><span class="dot green"></span> 1:00 — green</div>
+          <div class="key-row"><span class="dot orange"></span> 1:30 — orange</div>
+          <div class="key-row"><span class="dot red"></span> 2:00 — red</div>
+          <div class="key-row"><span class="dot flash-dot"></span> 2:30 — flashing red</div>
+        </div>
+
+        <label class="record-box">
+          <input type="checkbox" id="recordOption" checked />
+          <span>
+            <div class="record-title">Record response and create transcript</div>
+            <div class="record-note">The browser will ask for microphone permission. Audio stays on your device unless you download/share it.</div>
+          </span>
+        </label>
+
+        <div class="button-row">
+          <button class="secondary" onclick="newQuestion()">🎲 New Question</button>
+          <button class="primary" onclick="startSession()">▶ Start</button>
+          <button class="danger" onclick="stopSession()">■ Stop</button>
+          <button class="secondary" onclick="resetSession()">↺ Reset</button>
+        </div>
+
+        <div id="status"></div>
+
+        <a id="downloadLink" class="download-button" style="display:none;">
+          Download Recording
+        </a>
+      </aside>
+    </section>
+
+    <section class="card transcript-card">
+      <div class="transcript-header">
+        <h2 class="transcript-title">Transcript</h2>
+        <div class="transcript-actions">
+          <button class="primary" onclick="scoreSpeech()">Score Speech</button>
+          <button class="secondary" onclick="copyTranscript()">Copy Transcript</button>
+          <button class="secondary" onclick="downloadTranscript()">Download Transcript</button>
+          <button class="secondary" onclick="clearTranscript()">Clear</button>
+        </div>
+      </div>
+
+      <div id="transcript">Transcript will appear here when recording starts.</div>
+    </section>
+  </main>
+
+
+  <section id="scoreScreen" class="score-screen" style="display:none;">
+    <div class="score-card">
+      <div class="score-header">
+        <div>
+          <div class="card-label">Speech evaluation</div>
+          <h2 id="scoreTitle">Table Topics Score</h2>
+        </div>
+        <button class="secondary" onclick="backToApp()">← Back</button>
+      </div>
+
+      <div class="score-total">
+        <div class="score-total-number" id="scoreTotal">0/100</div>
+        <div>
+          <div class="score-total-label">Estimated total score</div>
+          <div class="score-note">Transcript-based score. Physical delivery and voice are estimated only.</div>
+        </div>
+      </div>
+
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead>
+            <tr>
+              <th>Rubric Area</th>
+              <th>Score</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody id="scoreRows"></tbody>
+        </table>
+      </div>
+
+      <div class="evaluation-grid">
+        <div class="evaluation-box">
+          <h3>Strengths</h3>
+          <ul id="strengthsList"></ul>
+        </div>
+
+        <div class="evaluation-box">
+          <h3>Improve Next Time</h3>
+          <ul id="improvementsList"></ul>
+        </div>
+      </div>
+
+      <div class="brief-evaluation">
+        <h3>Brief Evaluation</h3>
+        <p id="briefEvaluation"></p>
+      </div>
+
+      <button class="primary full-width" onclick="backToApp()">Back to App</button>
+    </div>
+  </section>
+
+  <div class="mobile-core-actions">
+    <button class="secondary" onclick="newQuestion()">🎲 New</button>
+    <button class="primary" onclick="startSession()">▶ Start</button>
+    <button class="danger" onclick="stopSession()">■ Stop</button>
+    <button class="secondary" onclick="resetSession()">↺ Reset</button>
+  </div>
+
+<script>
+let questions = [];
+let remainingQuestions = [];
+
+async function loadQuestions() {
+  try {
+    const response = await fetch("questions.json", { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error("Could not load questions.json");
+    }
+
+    questions = await response.json();
+
+    if (!Array.isArray(questions) || questions.length === 0) {
+      throw new Error("questions.json must contain a list of questions");
+    }
+
+    remainingQuestions = [...questions];
+
+    const questionCount = document.getElementById("questionCount");
+    if (questionCount) {
+      questionCount.innerText = questions.length + " questions loaded";
+    }
+
+    resetSession(false);
+
+  } catch (error) {
+    console.error(error);
+
+    questions = [
+      "If your toaster could give you life advice, what would it say?",
+      "What food deserves its own national anthem?",
+      "If your life had a warning label, what would it say?"
+    ];
+
+    remainingQuestions = [...questions];
+
+    const status = document.getElementById("status");
+    if (status) {
+      status.innerText = "Could not load questions.json, so fallback questions are being used.";
+    }
+
+    const questionCount = document.getElementById("questionCount");
+    if (questionCount) {
+      questionCount.innerText = questions.length + " fallback questions loaded";
+    }
+
+    resetSession(false);
+  }
+}
+
+function getRandomQuestion() {
+  if (remainingQuestions.length === 0) {
+    remainingQuestions = [...questions];
+  }
+
+  const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+  const question = remainingQuestions[randomIndex];
+
+  remainingQuestions.splice(randomIndex, 1);
+
+  return question;
+}
+
+let secondsElapsed = 0;
+let timerInterval = null;
+let sessionRunning = false;
+
+let mediaRecorder = null;
+let audioChunks = [];
+let audioStream = null;
+
+let recognition = null;
+let transcriptText = "";
+
+function newQuestion() {
+  if (!questions || questions.length === 0) {
+    document.getElementById("question").innerText = "Loading questions...";
+    return;
+  }
+
+  const questionElement = document.getElementById("question");
+  questionElement.classList.remove("question-placeholder");
+  questionElement.innerText = getRandomQuestion();
+  document.getElementById("questionCount").innerText = questions.length + " questions loaded";
+  resetSession(false);
+}
+
+function startSession() {
+  if (sessionRunning) {
+    setStatus("Already running.");
+    return;
+  }
+
+  sessionRunning = true;
+  hideDownloadLink();
+  startTimer();
+
+  const shouldRecord = document.getElementById("recordOption").checked;
+
+  if (shouldRecord) {
+    startRecording();
+    startTranscription();
+  } else {
+    setStatus("Timer started. Recording is off.");
+    document.getElementById("transcript").innerText =
+      "Recording is off, so no transcript will be created.";
+  }
+}
+
+function stopSession() {
+  if (!sessionRunning && !timerInterval) {
+    setStatus("Stopped.");
+  }
+
+  sessionRunning = false;
+  clearInterval(timerInterval);
+  timerInterval = null;
+
+  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+    mediaRecorder.stop();
+  }
+
+  if (audioStream) {
+    audioStream.getTracks().forEach(track => track.stop());
+    audioStream = null;
+  }
+
+  if (recognition) {
+    try {
+      recognition.stop();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  setStatus("Stopped. Download options are available if audio or transcript was captured.");
+}
+
+function resetSession(clearStatus = true) {
+  stopSession();
+
+  secondsElapsed = 0;
+  document.body.classList.remove("flash", "green", "orange", "red");
+  document.getElementById("timer").innerText = "00:00";
+
+  transcriptText = "";
+  document.getElementById("transcript").innerText =
+    "Transcript will appear here when recording starts.";
+
+  hideDownloadLink();
+
+  if (clearStatus) {
+    setStatus("");
+  }
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(function() {
+    secondsElapsed++;
+
+    const minutes = Math.floor(secondsElapsed / 60);
+    const seconds = secondsElapsed % 60;
+
+    document.getElementById("timer").innerText =
+      String(minutes).padStart(2, "0") + ":" +
+      String(seconds).padStart(2, "0");
+
+    document.body.classList.remove("green", "orange", "red");
+
+    if (secondsElapsed >= 150) {
+      document.body.classList.add("flash");
+    } else if (secondsElapsed >= 120) {
+      document.body.classList.remove("flash");
+      document.body.classList.add("red");
+    } else if (secondsElapsed >= 90) {
+      document.body.classList.add("orange");
+    } else if (secondsElapsed >= 60) {
+      document.body.classList.add("green");
+    }
+  }, 1000);
+}
+
+async function startRecording() {
+  try {
+    audioChunks = [];
+    audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+    mediaRecorder = new MediaRecorder(audioStream);
+
+    mediaRecorder.ondataavailable = function(event) {
+      if (event.data.size > 0) {
+        audioChunks.push(event.data);
+      }
+    };
+
+    mediaRecorder.onstop = function() {
+      if (audioChunks.length === 0) return;
+
+      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      const downloadLink = document.getElementById("downloadLink");
+      downloadLink.href = audioUrl;
+      downloadLink.download = createFileName("table-topic-recording", "webm");
+      downloadLink.style.display = "inline-flex";
+      downloadLink.innerText = "⬇ Download Recording";
+    };
+
+    mediaRecorder.start();
+    setStatus("Recording and timer started.");
+
+  } catch (error) {
+    setStatus("Recording could not start. Check microphone permissions.");
+    console.error(error);
+  }
+}
+
+function startTranscription() {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    document.getElementById("transcript").innerText =
+      "Live transcription is not supported in this browser. Try Chrome.";
+    return;
+  }
+
+  transcriptText = "";
+  document.getElementById("transcript").innerText = "";
+
+  recognition = new SpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = "en-AU";
+
+  recognition.onresult = function(event) {
+    let interimTranscript = "";
+
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const text = event.results[i][0].transcript;
+
+      if (event.results[i].isFinal) {
+        transcriptText += text.trim() + " ";
+      } else {
+        interimTranscript += text;
+      }
+    }
+
+    document.getElementById("transcript").innerHTML =
+      escapeHtml(transcriptText) +
+      "<em>" + escapeHtml(interimTranscript) + "</em>";
+  };
+
+  recognition.onerror = function(event) {
+    setStatus("Transcription issue: " + event.error);
+  };
+
+  recognition.onend = function() {
+    if (sessionRunning && document.getElementById("recordOption").checked) {
+      try {
+        recognition.start();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  recognition.start();
+}
+
+function downloadTranscript() {
+  const text = transcriptText.trim();
+
+  if (!text) {
+    alert("No transcript available yet.");
+    return;
+  }
+
+  const blob = new Blob([text], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = createFileName("table-topic-transcript", "txt");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+}
+
+function copyTranscript() {
+  const text = transcriptText.trim();
+
+  if (!text) {
+    alert("No transcript available yet.");
+    return;
+  }
+
+  navigator.clipboard.writeText(text)
+    .then(() => setStatus("Transcript copied."))
+    .catch(() => alert("Could not copy transcript."));
+}
+
+function clearTranscript() {
+  transcriptText = "";
+  document.getElementById("transcript").innerText =
+    "Transcript cleared.";
+  setStatus("Transcript cleared.");
+}
+
+function hideDownloadLink() {
+  const downloadLink = document.getElementById("downloadLink");
+  downloadLink.style.display = "none";
+  downloadLink.removeAttribute("href");
+}
+
+function setStatus(message) {
+  document.getElementById("status").innerText = message;
+}
+
+function createFileName(prefix, extension) {
+  const now = new Date();
+  const stamp = now.toISOString().replace(/[:.]/g, "-");
+  return prefix + "-" + stamp + "." + extension;
+}
+
+function escapeHtml(text) {
+  return text
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+function scoreSpeech() {
+  const text = transcriptText.trim();
+
+  if (!text) {
+    alert("No transcript available yet. Record a response first, then try scoring.");
+    return;
+  }
+
+  const result = evaluateTranscript(text);
+
+  document.querySelector(".page").style.display = "none";
+  const mobileActions = document.querySelector(".mobile-core-actions");
+  if (mobileActions) mobileActions.style.display = "none";
+
+  document.getElementById("scoreScreen").style.display = "block";
+  document.body.classList.remove("flash", "green", "orange", "red");
+
+  document.getElementById("scoreTotal").innerText = result.total + "/100";
+
+  const rows = document.getElementById("scoreRows");
+  rows.innerHTML = "";
+
+  result.sections.forEach(section => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td data-label="Rubric Area"><strong>${section.name}</strong><br><span style="color:#667085;">${section.criteria}</span></td>
+      <td data-label="Score">${section.score}/${section.max}</td>
+      <td data-label="Comment">${section.comment}</td>
+    `;
+    rows.appendChild(row);
+  });
+
+  const strengths = document.getElementById("strengthsList");
+  strengths.innerHTML = "";
+  result.strengths.forEach(item => {
+    const li = document.createElement("li");
+    li.innerText = item;
+    strengths.appendChild(li);
+  });
+
+  const improvements = document.getElementById("improvementsList");
+  improvements.innerHTML = "";
+  result.improvements.forEach(item => {
+    const li = document.createElement("li");
+    li.innerText = item;
+    improvements.appendChild(li);
+  });
+
+  document.getElementById("briefEvaluation").innerText = result.brief;
+  window.scrollTo(0, 0);
+}
+
+function backToApp() {
+  document.getElementById("scoreScreen").style.display = "none";
+  document.querySelector(".page").style.display = "block";
+
+  const mobileActions = document.querySelector(".mobile-core-actions");
+  if (mobileActions) {
+    mobileActions.style.display = window.innerWidth <= 840 ? "grid" : "none";
+  }
+
+  window.scrollTo(0, 0);
+}
+
+function evaluateTranscript(text) {
+  const lower = text.toLowerCase();
+  const words = lower.match(/\b[\w']+\b/g) || [];
+  const wordCount = words.length;
+  const sentences = text.split(/[.!?]+/).map(s => s.trim()).filter(Boolean);
+  const sentenceCount = Math.max(sentences.length, 1);
+  const avgSentenceLength = wordCount / sentenceCount;
+  const uniqueWords = new Set(words).size;
+  const lexicalVariety = wordCount ? uniqueWords / wordCount : 0;
+
+  const openingWords = ["today", "imagine", "first", "i believe", "let me", "there are", "when", "if"];
+  const closingWords = ["finally", "in conclusion", "so", "therefore", "ultimately", "the lesson", "that is why"];
+  const logicWords = ["because", "therefore", "so", "first", "second", "finally", "for example", "however", "but", "then"];
+  const enthusiasmWords = ["exciting", "amazing", "love", "brilliant", "fantastic", "funny", "surprising", "important", "memorable"];
+  const fillerWords = ["um", "uh", "like", "you know", "sort of", "kind of", "basically", "actually"];
+
+  const hasOpening = containsAny(lower, openingWords);
+  const hasClosing = containsAny(lower, closingWords);
+  const logicCount = countMatches(lower, logicWords);
+  const enthusiasmCount = countMatches(lower, enthusiasmWords);
+  const fillerCount = countMatches(lower, fillerWords);
+
+  let speechDevelopment = 14;
+  if (wordCount >= 80) speechDevelopment += 4;
+  if (wordCount >= 130) speechDevelopment += 3;
+  if (hasOpening) speechDevelopment += 3;
+  if (hasClosing) speechDevelopment += 3;
+  if (logicCount >= 2) speechDevelopment += 3;
+  speechDevelopment = clamp(speechDevelopment, 0, 30);
+
+  let effectiveness = 10;
+  if (wordCount >= 70) effectiveness += 3;
+  if (logicCount >= 2) effectiveness += 4;
+  if (enthusiasmCount >= 1) effectiveness += 3;
+  if (sentenceCount >= 4) effectiveness += 2;
+  if (lexicalVariety > 0.55) effectiveness += 3;
+  effectiveness = clamp(effectiveness, 0, 25);
+
+  const physical = 9;
+  const physicalComment = "Estimated only. Transcript cannot judge appearance, body language, or use of the speaking area.";
+
+  let voice = 9;
+  if (avgSentenceLength >= 8 && avgSentenceLength <= 24) voice += 2;
+  if (sentenceCount >= 4) voice += 1;
+  voice = clamp(voice, 0, 15);
+  const voiceComment = "Estimated from pacing and sentence rhythm only. Audio analysis would be needed for volume and vocal variety.";
+
+  let appropriateness = 5;
+  if (wordCount >= 50) appropriateness += 2;
+  if (wordCount <= 260) appropriateness += 2;
+  if (fillerCount <= 3) appropriateness += 1;
+  appropriateness = clamp(appropriateness, 0, 10);
+
+  let correctness = 2;
+  if (avgSentenceLength >= 6 && avgSentenceLength <= 28) correctness += 1;
+  if (lexicalVariety > 0.45) correctness += 1;
+  if (fillerCount <= 4) correctness += 1;
+  correctness = clamp(correctness, 0, 5);
+
+  const total = speechDevelopment + effectiveness + physical + voice + appropriateness + correctness;
+
+  const sections = [
+    {
+      name: "Speech Development",
+      criteria: "Opening, body, close, organisation, smoothness",
+      score: speechDevelopment,
+      max: 30,
+      comment: commentFor(speechDevelopment, 30, "Clear structure and development.", "Structure is emerging, but could be more deliberate.", "Needs a clearer opening, body, and close.")
+    },
+    {
+      name: "Effectiveness",
+      criteria: "Logic, directness, enthusiasm, purpose, audience response",
+      score: effectiveness,
+      max: 25,
+      comment: commentFor(effectiveness, 25, "Purpose comes through clearly with good directness.", "Good ideas, but the message could land more strongly.", "Needs stronger purpose, examples, and audience connection.")
+    },
+    {
+      name: "Physical",
+      criteria: "Appearance, body language, speaking area",
+      score: physical,
+      max: 15,
+      comment: physicalComment
+    },
+    {
+      name: "Voice",
+      criteria: "Flexibility, volume",
+      score: voice,
+      max: 15,
+      comment: voiceComment
+    },
+    {
+      name: "Appropriateness",
+      criteria: "To speech purpose and audience",
+      score: appropriateness,
+      max: 10,
+      comment: commentFor(appropriateness, 10, "Appropriate length and tone for a Table Topic.", "Mostly appropriate, but could be sharper for the prompt.", "May need a tighter response to the question.")
+    },
+    {
+      name: "Correctness",
+      criteria: "Grammar, pronunciation, word selection",
+      score: correctness,
+      max: 5,
+      comment: commentFor(correctness, 5, "Good word choice and clarity.", "Generally clear with some rough edges.", "Needs cleaner wording and sentence control.")
+    }
+  ];
+
+  const strengths = [];
+  if (hasOpening) strengths.push("The response appears to start with a clear opening.");
+  if (logicCount >= 2) strengths.push("There are useful linking words that help the speech flow logically.");
+  if (lexicalVariety > 0.5) strengths.push("The vocabulary has good variety for an impromptu response.");
+  if (wordCount >= 80 && wordCount <= 230) strengths.push("The response length is well suited to a Table Topic.");
+  if (strengths.length === 0) strengths.push("You got words out under pressure — the first victory in Table Topics.");
+
+  const improvements = [];
+  if (!hasOpening) improvements.push("Start with a stronger opening line that directly frames your answer.");
+  if (!hasClosing) improvements.push("Add a clear closing sentence so the response lands with impact.");
+  if (logicCount < 2) improvements.push("Use signposting such as first, because, for example, and finally.");
+  if (fillerCount > 3) improvements.push("Reduce filler words and use short pauses instead.");
+  if (wordCount < 60) improvements.push("Develop the answer with one example or mini-story.");
+  if (wordCount > 260) improvements.push("Tighten the answer so it finishes before the red light starts judging you.");
+  if (improvements.length === 0) improvements.push("Next step: add more vocal variety and a memorable closing line.");
+
+  const brief = makeBriefEvaluation(total, wordCount, hasOpening, hasClosing, logicCount);
+
+  return { total, sections, strengths: strengths.slice(0, 3), improvements: improvements.slice(0, 3), brief };
+}
+
+function makeBriefEvaluation(total, wordCount, hasOpening, hasClosing, logicCount) {
+  let level = "developing";
+  if (total >= 80) level = "strong";
+  else if (total >= 65) level = "solid";
+
+  let brief = "This was a " + level + " Table Topics response based on the transcript. ";
+  brief += "It ran to approximately " + wordCount + " words. ";
+
+  if (hasOpening && hasClosing) {
+    brief += "It appears to have both an opening and a close, which gives it a complete shape. ";
+  } else if (hasOpening) {
+    brief += "It starts reasonably well, but would benefit from a more deliberate close. ";
+  } else if (hasClosing) {
+    brief += "It has some sense of conclusion, but needs a stronger opening. ";
+  } else {
+    brief += "The biggest opportunity is to shape it with a clear opening and closing sentence. ";
+  }
+
+  if (logicCount >= 2) {
+    brief += "The use of linking language helps the logic flow.";
+  } else {
+    brief += "Adding signposts and one concrete example would make the answer easier to follow.";
+  }
+
+  return brief;
+}
+
+function containsAny(text, phrases) {
+  return phrases.some(phrase => text.includes(phrase));
+}
+
+function countMatches(text, phrases) {
+  let count = 0;
+  phrases.forEach(phrase => {
+    const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const matches = text.match(new RegExp("\\b" + escaped + "\\b", "g"));
+    if (matches) count += matches.length;
+  });
+  return count;
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function commentFor(score, max, high, mid, low) {
+  const ratio = score / max;
+  if (ratio >= 0.8) return high;
+  if (ratio >= 0.55) return mid;
+  return low;
+}
+
+
+loadQuestions();
+</script>
+</body>
+</html>
